@@ -1,0 +1,20 @@
+{
+	"name": "github-action-package-publisher",
+	"version": "1.0.1",
+	"description": "Use Github as package host",
+	"main": "lib/index.js",
+	"repository": "https://github.com/Moumouls/github-action-package-publisher.git",
+	"author": "Antoine Cormouls <contact.antoine.cormouls@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "tsc -p .",
+		"publish": "yarn build && yarn standard-version",
+		"lint": "prettier -w *.ts"
+	},
+	"devDependencies": {
+		"prettier": "^2.1.2",
+		"standard-version": "^9.0.0",
+		"typescript": "^4.0.5"
+	},
+	"dependencies": {}
+}
