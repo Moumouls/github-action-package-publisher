@@ -31,7 +31,7 @@ jobs:
         run: git checkout --track origin/release && git pull && git merge master
 
       - name: Remove lib from git ignore
-        run: sed 'lib' .gitignore
+        run: sed '/lib/d' .gitignore
 
       - name: Install
         run: yarn
