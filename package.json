@@ -8,7 +8,6 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc -p .",
-		"build:ci": "yarn build && yarn standard-version",
 		"lint": "prettier -w *.ts"
 	},
 	"devDependencies": {
