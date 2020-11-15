@@ -1,1 +1,1 @@
-console.log('I m a TS file')
+console.log('I m a TS file test')
