@@ -27,6 +27,9 @@ jobs:
       - name: Merge master into release
         run: git fetch origin release && git checkout release && git merge origin/master
 
+      - name: Remove lib from git ignore
+        run: sed 'lib' .gitignore
+
       - name: Install
         run: yarn
         env:
