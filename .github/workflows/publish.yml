@@ -1,0 +1,41 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: true
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Merge master into release
+        run: git fetch origin release && git checkout release && git merge origin/master
+
+      - name: Install
+        run: yarn
+        env:
+          NODE_ENV: development
+
+      - name: Build
+        run: yarn build:ci
+        env:
+          NODE_ENV: development
+
+      - name: Release
+        run: git push --follow-tags
