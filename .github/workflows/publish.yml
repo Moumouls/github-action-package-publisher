@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Merge master into release
-        run: git fetch origin release && git checkout release && git merge origin/master
+        run: git checkout release && git merge master
 
       - name: Install
         run: yarn
