@@ -26,8 +26,8 @@ jobs:
 
       - name: Configure Identity
         run: git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
-      
-        - name: Merge master into release
+
+      - name: Merge master into release
         run: git fetch origin release && git checkout release && git merge origin/master --allow-unrelated-histories
 
       - name: Remove lib from git ignore
