@@ -65,7 +65,7 @@ jobs:
 
 		# Adjust the output folder of your app
       - name: Remove lib from git ignore
-        run: sed '/lib/d' .gitignore
+        run: sed '/lib/d' .gitignore | tee .gitignore
 
       - name: Install
         run: yarn # or npm i
