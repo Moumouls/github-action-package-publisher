@@ -29,6 +29,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      # - name: Get yarn cache
+      #    id: yarn-cache
+      #    run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      #  - uses: actions/cache@v1
+      #    with:
+      #        path: ${{ steps.yarn-cache.outputs.dir }}
+      #        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #        restore-keys: |
+      #            ${{ runner.os }}-yarn-
+
       # Checkout the release branch
       - name: Configure
         run: git config pull.rebase true && git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
@@ -46,15 +57,15 @@ jobs:
           NODE_ENV: development
 
       - name: Build
-        run: yarn build # or npm run build
+        run: rm -rf lib && yarn build # or npm run build
+
+      - name: Commit build
+        run: git add . && git commit -m "Build"
 
       # If new addition detected it will create a new git tag
       # and update the package version into package.json
       - name: Version
         run: yarn standard-version # or npm run standard-version
 
-      # If changes detected push the new release and the new tag
-      # then your custom package can be used like:
-      # "your-package": "githubUsername/repoName#v1.0.0"
       - name: Release
-        run: git add -A && git commit -m "Release" && git push --follow-tags
+        run: git push origin release --follow-tags
